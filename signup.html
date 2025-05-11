@@ -8,25 +8,19 @@
   </head>
   <body>
     <div class="title">회원가입 페이지 입니다.</div>
-    <form id="singup-form" onsubmit="handleSignup(); return false;">
+    <form id="singup-form" onsubmit="Signup(); return false;">
       <div class="login">
         <label for="userID"></label>
-        <input type="text" id="userID" size="20" placeholder="ID" required />
+        <input type="text" id="userID" placeholder="ID" required />
       </div>
       <div class="password">
         <label for="pw"></label>
-        <input
-          type="password"
-          id="pw"
-          size="20"
-          placeholder="Password"
-          required
-        />
+        <input type="password" id="pw" placeholder="Password" required />
       </div>
       <button type="submit" class="login-btn">회원가입</button>
     </form>
     <br />
-    <a href="index.html">로그인창으로 돌아가기</a>
+    <a href="index.html">로그인 창으로 돌아가기</a>
     <script src="main.js"></script>
   </body>
 </html>

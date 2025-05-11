@@ -1,25 +1,14 @@
 // 로그인 처리 함수
-function handleLogin() {
-  // 입력값 가져오기
-  var userID = document.getElementById('userID').value // 아이디 상자에서 이름 가져와
-  var password = document.getElementById('pw').value // 비밀번호 상자에서 비밀코드 가져와
-  var saveSignedIn = document.getElementById('saveSignedIn').checked // "로그인 유지" 체크박스 눌렀는지 확인
+function Login() {
+  var userID = document.getElementById('userID').value
+  var password = document.getElementById('pw').value
 
-  // 저장된 사용자 정보 가져오기: 비밀 상자에서 이름이 있는지 찾아봐
-  var storedUser = localStorage.getItem('user_' + userID)
-
-  if (storedUser) {
+  var saveUser = localStorage.getItem('user_' + userID)
+  if (saveUser) {
     // JSON으로 사용자 정보 읽기
-    var user = JSON.parse(storedUser)
+    var user = JSON.parse(saveUser)
     if (user.password == password) {
-      // 로그인 유지 체크
-      if (saveSignedIn) {
-        // 브라우저 꺼도 로그인 유지
-        localStorage.setItem('loggedInUser', userID)
-      } else {
-        // 탭 닫으면 로그아웃
-        sessionStorage.setItem('loggedInUser', userID)
-      }
+      sessionStorage.setItem('loginUser', userID)
       alert('로그인 성공!')
       window.location.href = 'main.html'
     } else {
@@ -34,20 +23,37 @@ function handleLogin() {
 }
 
 // 회원가입 처리 함수
-function handleSignup() {
-  // 입력값 가져오기
+function Signup() {
   var userID = document.getElementById('userID').value
   var password = document.getElementById('pw').value
 
-  // 이미 있는 아이디인지 확인
+  // 중복 아이디 확인인
   if (localStorage.getItem('user_' + userID)) {
-    alert('이미 있는 아이디입니다.')
+    alert('이미 있는 아이디 입니다.')
     return
   }
 
-  // 사용자 정보 JSON으로 저장: 새 이름과 비밀코드를 비밀 편지에 써
+  // 사용자 정보 JSON으로 저장
   var user = { userID: userID, password: password }
   localStorage.setItem('user_' + userID, JSON.stringify(user))
   alert('회원가입 성공!')
   window.location.href = 'index.html'
+}
+
+function Logout() {
+  //로그아웃
+  if (confirm('로그아웃 하시겠습니까?')) {
+    sessionStorage.removeItem('loginUser')
+    window.location.href = 'index.html'
+  }
+}
+
+//회원 탈퇴
+function Delete() {
+  if (confirm('정말 회원탈퇴를 진행하시겠습니까?')) {
+    localStorage.clear()
+    sessionStorage.clear()
+    alert('회원탈퇴가 완료되었습니다.')
+    window.location.href = 'signup.html'
+  }
 }
