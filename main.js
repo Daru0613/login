@@ -8,7 +8,7 @@ function Login() {
     // JSON으로 사용자 정보 읽기
     var user = JSON.parse(saveUser)
     if (user.password == password) {
-      localStorage.setItem('loginUser', userID)
+      sessionStorage.setItem('loginUser', userID)
       alert('로그인 성공!')
       window.location.href = 'main.html'
     } else {
